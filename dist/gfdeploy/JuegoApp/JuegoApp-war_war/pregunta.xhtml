@@ -1,0 +1,70 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Mentenedor Pregunta</title>
+    </h:head>
+    <h:body>
+        <h:form id="fp">            
+            <h:panelGrid columns="2">                
+                <h:outputText value="Pregunta" />    
+                <p:inputText value="#{preguntaBean.preguntaCuestionario}" />                           
+                <h:outputText value="Alternativa uno" />    
+                <p:inputText value="#{preguntaBean.alternativaUno}"   />                
+                <h:outputText value="Alternativa dos" />    
+                <p:inputText value="#{preguntaBean.alternativaDos}"  />
+                <h:outputText value="Alternativa tres" />    
+                <p:inputText value="#{preguntaBean.alternativaTres}"  />         
+                <h:outputText value="Alternativa cuatro" />    
+                <p:inputText value="#{preguntaBean.alternativaCuatro}" />
+                <p:selectOneMenu  id="menuRespuesta" value="#{preguntaBean.respuesta}" >                   
+                    <f:selectItem itemLabel="A" itemValue="A"/>
+                    <f:selectItem itemLabel="B" itemValue="B"/>
+                    <f:selectItem itemLabel="C" itemValue="C"/>
+                    <f:selectItem itemLabel="D" itemValue="D"/>                                        
+                </p:selectOneMenu>
+                <h:outputText value="" /> 
+                <!-- boton de ingreso --> 
+                <p:commandButton actionListener="#{preguntaBean.crear()}"  value="CREAR" update="fp" />                              
+          </h:panelGrid>            
+            <p:dataTable value="#{preguntaBean.preguntas}" var="p" editable="true">                                   
+                <p:column headerText="Pregunta">
+                    <h:outputText value="#{p.preguntaCuestionario}" />
+                </p:column>
+                <p:column headerText="Alternativa uno">
+                    <h:outputText value="#{p.alternativauno}" />
+                </p:column>
+                <p:column headerText="Alternativa dos">
+                    <h:outputText value="#{p.alternativados}" />
+                </p:column>
+                <p:column headerText="Alternativa tres">
+                    <h:outputText value="#{p.alternativatres}" />
+                </p:column>
+                <p:column headerText="Alternativa cuatro">
+                    <h:outputText value="#{p.alternativacuatro}" />
+                </p:column>
+                <p:column headerText="Respuesta">
+                    <h:outputText value="#{p.respuesta}" />
+                </p:column>                    
+                
+                <p:column headerText="Eliminar">
+                    <h:commandLink action="#{preguntaBean.eliminar(p)}" 
+                                      value="Eliminar" 
+                                      onclick="return confirm('¿Desea eleminar pregunta?')"
+                                      />    
+                </p:column>
+                <p:column headerText="Modificar">
+                    <h:commandLink action="#{preguntaBean.modificar(p)}" 
+                                      value="modificar"                                       
+                                      />    
+                </p:column>                
+            </p:dataTable>    
+            <br/>
+            
+         </h:form>                                       
+    </h:body>    
+</html>                                       
+
